@@ -1,9 +1,13 @@
+
 #ifndef EXCEPT_INCLUDED
 #define EXCEPT_INCLUDED
 #include <setjmp.h>
+/*
+  异常是Except_T类型的全局或静态变量：
+ */
 #define T Except_T
 typedef struct T {
-	const char *reason;
+	const char *reason; /* Except_T结构只有一个字段，可以初始化为一个描述异常信息的字符串。在发生未处理的异常时，将输出该字符串。*/
 } T;
 typedef struct Except_Frame Except_Frame;
 struct Except_Frame {
@@ -13,6 +17,12 @@ struct Except_Frame {
 	int line;
 	const T *exception;
 };
+/**
+ * Except接口将setjmp/longjmp设施封装在一组宏和函数中，
+ * 这些宏和函数相互协作，提供了一个结构化的异常处理设施。
+ * 它并不完善，但避免了一些错误。
+ * 而其中的宏很清楚地标识出了使用异常的位置。
+ */
 enum { Except_entered=0, Except_raised,
        Except_handled,   Except_finalized };
 extern Except_Frame *Except_stack;
@@ -32,6 +42,10 @@ extern void Except_pop(void);
 #define RERAISE Except_raise(Except_frame.exception, \
 	Except_frame.file, Except_frame.line)
 #define RETURN switch (Except_pop(),0) default: return
+/**
+ * 处理程序通过TRY-EXCEPT和TRY-FINALLY语句实例化，这些语句用宏实现。
+ * 这些语句处理嵌套异常并管理异常状态数据。
+ */
 #define TRY do { \
 	volatile int Except_flag; \
 	Except_Frame Except_frame; \
