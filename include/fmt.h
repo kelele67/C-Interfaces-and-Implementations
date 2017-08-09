@@ -20,7 +20,7 @@ extern void Fmt_print (const char *fmt, ...);
 extern void Fmt_fprint(FILE *stream, const char *fmt, ...);
 extern void Fmt_sfmt(char *buf, int size, const char *fmt, ...);
 extern int Fmt_vsfmt(char *buf, int size, const char *fmt, va_list_box *box);
-extern char *Fmt_string(cosnt char *fmt, ...);
+extern char *Fmt_string(const char *fmt, ...);
 extern char *Fmt_vstring(const char *fmt, va_list_box *box);
 extern T Fmt_register(int code, T cvt);
 extern void Fmt_putd(const char *str, int len,

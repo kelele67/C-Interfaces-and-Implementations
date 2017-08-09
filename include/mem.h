@@ -1,5 +1,5 @@
 #ifndef MEM_INCLUDED
-#define MEM#d_INCLUDED
+#define MEM_INCLUDED
 #include "except.h"
 extern const Except_T Mem_Failed;
 extern void *Mem_alloc (long nbytes,
