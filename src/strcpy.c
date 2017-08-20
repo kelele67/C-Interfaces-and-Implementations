@@ -14,6 +14,32 @@ char *strcpy(char* dst, const char* src) {
 	return s;
 }
 
+// 考虑内存重叠的情况
+
+char *strcpy(char* dst, const char *src) {
+	assert((dst != NULL) && (src != NULL));
+	char *s = dst;
+	my_memcpy(dst, src, strlen(src)+1);
+	return s;
+}
+
+char *my_memcpy(char *dst, char *src, int cnt) {
+	assert((dst != NULL) && (src != NULL));
+	char *s = dst;
+	// 内存重叠,从高地址开始复制
+	if (dst >= src && dst <= src + cnt - 1) {
+		dst = dst + cnt - 1;
+		src = src + cnt - 1;
+		while (cnt --)
+			*dst-- = *src--;
+	}
+	else {
+		while (cnt--)
+			*dst++ = *src++;
+	}
+	return s;
+}
+
 // 顺便写了strlen, strcat, strcmp
 int strlen(const char* str) {
 	assert(str != NULL);
