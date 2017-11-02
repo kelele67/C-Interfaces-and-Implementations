@@ -77,7 +77,7 @@ static unsigned long scatter[] = {
 const char *Atom_string(const char *str) {
 	assert(str);
 	return Atom_new(str, strlen(str));
-}
+} 
 const char *Atom_int(long n) {
 	char str[43];
 	char *s = str + sizeof str;

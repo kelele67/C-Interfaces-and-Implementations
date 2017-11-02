@@ -1,6 +1,6 @@
 ## C-Interfaces-and-Implementations
 
-看《语言接口与实现》码的例子代码
+看《C语言接口与实现》码的例子代码
 
 ## 章节
 
